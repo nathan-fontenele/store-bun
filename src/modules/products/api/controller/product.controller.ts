@@ -1,10 +1,10 @@
 import type { Context } from "hono";
-import type { CreateProdutcUseCase } from "../../application/use-cases/create-product.use-case";
+import type { CreateProductUseCase } from "../../application/use-cases/create-product.use-case";
 import { createProductSchema } from './../schemas/create-product.schema';
 
 export class ProductController{
     constructor(
-        private readonly createProduct: CreateProdutcUseCase,
+        private readonly createProduct: CreateProductUseCase,
     ){}
 
     create = async (c: Context) => {

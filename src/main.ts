@@ -1,6 +1,8 @@
 // Inicializa o processo e configura o server
 
-import {app} from "./app";
+import { createApp } from "./app";
+
+const app = createApp();
 
 const port = Number(Bun.env.PORT ?? 3000);
 

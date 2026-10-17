@@ -6,7 +6,7 @@ interface CreateProductInput {
     price: number;
 }
 
-export class CreateProdutcUseCase {
+export class CreateProductUseCase {
     constructor (
         private readonly repository: ProductRepository,
     ){}

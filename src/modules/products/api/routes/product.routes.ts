@@ -1,12 +1,10 @@
 import { Hono } from "hono";
-import { ProductController } from "../controller/product.controller";
-import { CreateProdutcUseCase } from "../../application/use-cases/create-product.use-case";
-import { InMemoryProductRepository } from "../../infrastructure/repositories/in-memory-product.repository";
+import type { ProductController } from "../controller/product.controller";
 
-const repository = new InMemoryProductRepository();
-const useCase = new CreateProdutcUseCase(repository);
-const controller = new ProductController(useCase);
+export function createProductRoutes(controller: ProductController) {
+  const routes = new Hono();
 
-export const productRoutes = new Hono();
+  routes.post("/", controller.create);
 
-productRoutes.post("/", controller.create);
+  return routes;
+}

@@ -1,15 +1,21 @@
 //Monta as aplicação HTTP e suas rotas
 
 import { Hono } from "hono";
-import { productRoutes } from "./modules/products/api/routes/product.routes";
+import { errorHandler } from "./modules/shared/http/error-handler";
+import { createProductModule } from "./modules/products/product.module";
 
-export const app = new Hono();
+export function createApp() {
+    const app = new Hono;
 
-app.get("/health", (c) => {
-    return c.json({
-        status: "ok",
-        timestamp: new Date().toISOString(),
+    app.onError(errorHandler);
+
+    app.get("/health", (c) => {
+        return c.json({status: "ok"});
     });
-});
 
-app.route("/api/v1/products", productRoutes);
+    const products = createProductModule();
+
+    app.route("/api/v1/products", products.routes);
+
+    return app;
+}
